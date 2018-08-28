@@ -30,7 +30,6 @@ headers = {
 }
 def check(i):
 	i = i.rstrip()
-	print i
 	data = [('ip', i),]
 	g=requests.post('http://www.ipvoid.com/ip-blacklist-check/', headers=headers, cookies=cookies, data=data)
 	
