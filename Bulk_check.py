@@ -30,9 +30,9 @@ headers = {
 }
 def check(i):
 	i = i.rstrip()
-        print i
+	print i
 	data = [('ip', i),]
-        g=requests.post('http://www.ipvoid.com/ip-blacklist-check/', headers=headers, cookies=cookies, data=data)
+	g=requests.post('http://www.ipvoid.com/ip-blacklist-check/', headers=headers, cookies=cookies, data=data)
 	
         string1 = unicodedata.normalize('NFKD', g.text).encode('ascii','ignore')
         r = string1.translate(string.maketrans("\n\t\r", "   "))
