@@ -29,16 +29,21 @@ headers = {
     'Connection': 'keep-alive',
 }
 def check(i):
-        data = [('ip', i),]
+	i = i.rstrip()
+        print i
+	data = [('ip', i),]
         g=requests.post('http://www.ipvoid.com/ip-blacklist-check/', headers=headers, cookies=cookies, data=data)
 	
         string1 = unicodedata.normalize('NFKD', g.text).encode('ascii','ignore')
         r = string1.translate(string.maketrans("\n\t\r", "   "))
-        print(str(i)+ str(re.findall(r'BLACKLISTED \d+\/\d+',str(r))))
+        print(str(i)+" " +str(re.findall(r'BLACKLISTED \d+\/\d+',str(r))))
 
-with open(sys.argv[1]) as f:
-    lines = f.readlines()
-from multiprocessing import Pool
-if __name__ == '__main__':
-    p = Pool(10)
-    p.map(check, lines)
+try:
+	with open(sys.argv[1]) as f:
+		lines = f.readlines()
+	from multiprocessing import Pool
+	if __name__ == '__main__':
+		p = Pool(10)
+		p.map(check, lines)
+except KeyboardInterrupt:
+	exit()
