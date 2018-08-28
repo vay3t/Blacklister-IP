@@ -34,9 +34,9 @@ def check(i):
 	data = [('ip', i),]
 	g=requests.post('http://www.ipvoid.com/ip-blacklist-check/', headers=headers, cookies=cookies, data=data)
 	
-        string1 = unicodedata.normalize('NFKD', g.text).encode('ascii','ignore')
-        r = string1.translate(string.maketrans("\n\t\r", "   "))
-        print(str(i)+" " +str(re.findall(r'BLACKLISTED \d+\/\d+',str(r))))
+	string1 = unicodedata.normalize('NFKD', g.text).encode('ascii','ignore')
+	r = string1.translate(string.maketrans("\n\t\r", "   "))
+	print(str(i)+" " +str(re.findall(r'BLACKLISTED \d+\/\d+',str(r))))
 
 try:
 	with open(sys.argv[1]) as f:
